@@ -5,34 +5,24 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
-    local repo = "https://github.com/folke/lazy.nvim.git"
-    vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
+	local repo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
 end
 
 vim.opt.rtp:prepend(lazypath)
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.smartindent = true
-vim.opt.wrap = false
-vim.opt.termguicolors = true
-vim.opt.mouse = "a"
-vim.opt.clipboard = "unnamedplus"
 
 local lazy_config = require("configs.lazy")
 
 -- load plugins
 require("lazy").setup({
-    {
-        "NvChad/NvChad",
-        lazy = false,
-        branch = "v2.5",
-        import = "nvchad.plugins",
-    },
+	{
+		"NvChad/NvChad",
+		lazy = false,
+		branch = "v2.5",
+		import = "nvchad.plugins",
+	},
 
-    { import = "plugins" },
+	{ import = "plugins" },
 }, lazy_config)
 
 -- load theme
@@ -43,5 +33,5 @@ require("options")
 require("nvchad.autocmds")
 
 vim.schedule(function()
-    require("mappings")
+	require("mappings")
 end)
