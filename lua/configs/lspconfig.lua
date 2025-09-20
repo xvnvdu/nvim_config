@@ -11,6 +11,7 @@ local servers = {
 	"marksman",
 	"yamlls",
 	"tinymist",
+	"sqls",
 }
 
 for _, server in ipairs(servers) do

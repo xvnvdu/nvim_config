@@ -9,7 +9,7 @@ map("i", "jk", "<ESC>")
 
 -- insert new line below without splitting current one
 vim.keymap.set("i", "<S-CR>", function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>o", true, false, true), "n", true)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>o", true, false, true), "n", true)
 end, { desc = "Insert new line (like 'o') in the insert mode" })
 
 -- moving lines
@@ -34,19 +34,24 @@ vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 
 -- rename current buffer
 vim.keymap.set("n", "<M-r>", function()
-    vim.ui.input({ prompt = "New file name: " }, function(new_name)
-        if new_name and new_name ~= "" then
-            vim.cmd("file " .. new_name)
-            vim.cmd("doautocmd BufRead")
-            print("Buffer renamed to " .. new_name)
-        end
-    end)
+	vim.ui.input({ prompt = "New file name: " }, function(new_name)
+		if new_name and new_name ~= "" then
+			vim.cmd("file " .. new_name)
+			vim.cmd("doautocmd BufRead")
+			print("Buffer renamed to " .. new_name)
+		end
+	end)
 end, { desc = "Rename buffer (and reload filetype)" })
 
 vim.api.nvim_create_autocmd("BufNewFile", {
-    pattern = "*",
-    callback = function()
-        vim.opt_local.swapfile = false
-    end,
+	pattern = "*",
+	callback = function()
+		vim.opt_local.swapfile = false
+	end,
 })
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- typst preview doc
+vim.keymap.set("n", "<leader>p", "<Cmd>TypstPreview<CR>")
+
+-- enter normal mode in terminal
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
